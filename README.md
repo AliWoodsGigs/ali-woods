@@ -86,11 +86,6 @@ With additional time the following improvements could be made to this project:
  - [ ] Add modern format images to improve page loading speed
  - [ ] Replace hero background png with svg pattern to improve loading speed and allow animation
 
-## Codeowners
-This project was created by [Alistair Garioch](https://github.com/agarioch). 
-
-Contact him at [alistair@garioch.dev](mailto:alistair@garioch.dev) with any development related questions.
-
 ## Disclaimer
 
 **Designs:**
