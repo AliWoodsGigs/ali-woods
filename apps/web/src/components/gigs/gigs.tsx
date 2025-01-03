@@ -55,7 +55,7 @@ const Gigs = ({ gigs }: GigsProps) => {
         <div className="bg-orange my-12 translate-x-5 translate-y-5 border-4">
           <div className="border-black -translate-x-5 -translate-y-5 border-4 bg-white">
             <div className="bg-blue border-black border-b-4 px-4 py-12 sm:px-16">
-              <h2 className="text-heading">2024 Gigs</h2>
+              <h2 className="text-heading">Gigs</h2>
               <p className="max-w-prose pt-8 text-copy text-white">
                 {`Stay in the loop with Ali's upcoming performances. Check out the
               list below for details on where you can catch the next wave of
