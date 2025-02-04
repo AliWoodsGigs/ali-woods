@@ -126,16 +126,16 @@ const Newsletter = () => {
                 type="email"
                 autoComplete="email"
                 placeholder="Email"
-                className="min-w-0 grow rounded-none bg-white-light px-5 py-3 text-gray-dark"
+                className="min-w-0 grow rounded-none bg-white-light px-5 py-3 text-gray-dark border-4"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <select
-                className="min-w-0 grow rounded-none bg-white-light px-5 py-3 text-gray-dark"
+                className="min-w-0 grow rounded-none bg-white-light px-5 py-3 text-gray-dark border-4"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
               >
-                <option value="">Select Country</option>
+                <option value="" disabled>Where do you live?</option>
                 {prioritizedCountries.map(([code, name]) => (
                   <option key={code} value={name}>
                     {name}
@@ -145,7 +145,7 @@ const Newsletter = () => {
               </select>
               <button
                 type="submit"
-                className="bg-blue border-black shrink-0 border-l-4 px-5 py-3 font-bold uppercase text-yellow"
+                className="bg-blue border-black shrink-0 border-4 px-5 py-3 font-bold uppercase text-yellow"
                 disabled={isLoading}
               >
                 {isLoading ? "Loading" : "Sign up"}
