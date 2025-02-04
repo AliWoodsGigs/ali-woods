@@ -1,4 +1,13 @@
 import {defineField, defineType} from 'sanity';
+import countries from "i18n-iso-countries";
+import enLocale from "i18n-iso-countries/langs/en.json";
+
+countries.registerLocale(enLocale);
+const countryList = Object.entries(countries.getNames("en")).map(([code, name]) => ({
+  title: name,
+  value: name,
+}));
+
 
 const Gig = defineType({
   name: 'gig',
@@ -113,9 +122,12 @@ const Subscribers = defineType({
       name: 'country',
       title: 'Country',
       type: 'string',
-      validation: (rule) => rule.required(),
       description: 'Country of the subscriber',
+      options: {
+        list: countryList, // Ensure countryList is defined using ISO 3166
+      },
     }),
+    
   ],
 });
 
