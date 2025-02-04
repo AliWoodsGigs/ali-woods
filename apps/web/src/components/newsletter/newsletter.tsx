@@ -5,7 +5,15 @@ import countries from "i18n-iso-countries";
 import enLocale from "i18n-iso-countries/langs/en.json";
 
 countries.registerLocale(enLocale);
-const countryList = Object.entries(countries.getNames("en"));
+const countryList = Object.entries(countries.getNames("en"))
+  .filter(([code]) => code !== "GB") // Remove UK from the original list
+  .sort((a, b) => a[1].localeCompare(b[1])); // Sort remaining countries alphabetically
+
+const prioritizedCountries = [
+  ["GB", "United Kingdom"], // Manually place UK at the top
+  ...countryList, // Append the rest of the countries
+];
+
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -128,11 +136,12 @@ const Newsletter = () => {
                 onChange={(e) => setCountry(e.target.value)}
               >
                 <option value="">Select Country</option>
-                {countryList.map(([code, name]) => (
+                {prioritizedCountries.map(([code, name]) => (
                   <option key={code} value={name}>
                     {name}
                   </option>
                 ))}
+
               </select>
               <button
                 type="submit"
