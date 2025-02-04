@@ -1,6 +1,11 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState, type FormEvent } from "react";
+import countries from "i18n-iso-countries";
+import enLocale from "i18n-iso-countries/langs/en.json";
+
+countries.registerLocale(enLocale);
+const countryList = Object.entries(countries.getNames("en"));
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -117,14 +122,18 @@ const Newsletter = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <input
-                type="text"
-                autoComplete="country-name"
-                placeholder="Country"
+              <select
                 className="min-w-0 grow rounded-none bg-white-light px-5 py-3 text-gray-dark"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
-              />
+              >
+                <option value="">Select Country</option>
+                {countryList.map(([code, name]) => (
+                  <option key={code} value={name}>
+                    {name}
+                  </option>
+                ))}
+              </select>
               <button
                 type="submit"
                 className="bg-blue border-black shrink-0 border-l-4 px-5 py-3 font-bold uppercase text-yellow"
