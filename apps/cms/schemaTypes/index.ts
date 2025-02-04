@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import {defineField, defineType} from 'sanity';
 
 const Gig = defineType({
   name: 'gig',
@@ -47,12 +47,12 @@ const Gig = defineType({
       tickets_status: 'tickets_status',
     },
     prepare(selection) {
-      const {location, date, tickets_status} = selection
-      const dateLabel = date ? new Date(date).toLocaleDateString() : 'TBA'
+      const {location, date, tickets_status} = selection;
+      const dateLabel = date ? new Date(date).toLocaleDateString() : 'TBA';
       return {
         title: `${location} - ${dateLabel}`,
         subtitle: tickets_status,
-      }
+      };
     },
   },
   orderings: [
@@ -67,7 +67,7 @@ const Gig = defineType({
       by: [{field: 'date', direction: 'desc'}],
     },
   ],
-})
+});
 
 const Video = defineType({
   name: 'video',
@@ -96,7 +96,7 @@ const Video = defineType({
       validation: (rule) => rule.required().max(100),
     }),
   ],
-})
+});
 
 const Subscribers = defineType({
   name: 'subscribers',
@@ -109,7 +109,14 @@ const Subscribers = defineType({
       type: 'string',
       validation: (rule) => rule.required().email(),
     }),
+    defineField({
+      name: 'country',
+      title: 'Country',
+      type: 'string',
+      validation: (rule) => rule.required(),
+      description: 'Country of the subscriber',
+    }),
   ],
-})
+});
 
-export const schemaTypes = [Gig, Video, Subscribers]
+export const schemaTypes = [Gig, Video, Subscribers];

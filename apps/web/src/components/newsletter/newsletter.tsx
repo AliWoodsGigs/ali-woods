@@ -28,6 +28,7 @@ const cardVariants = {
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
+  const [country, setCountry] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -44,7 +45,7 @@ const Newsletter = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ email, country }),
     });
 
     if (res.ok) {
@@ -52,7 +53,9 @@ const Newsletter = () => {
     }
     setIsLoading(false);
     setEmail("");
+    setCountry("");
   };
+
   return (
     <section id="newsletter" className="flex border-y-4 bg-green">
       <div className="container flex flex-col items-center md:flex-row md:gap-20">
@@ -103,7 +106,7 @@ const Newsletter = () => {
             </p>
           ) : (
             <form
-              className="border-black flex w-full border-4 text-sm sm:text-base"
+              className="border-black flex w-full flex-col gap-4 text-sm sm:text-base"
               onSubmit={handleSubmit}
             >
               <input
@@ -113,6 +116,14 @@ const Newsletter = () => {
                 className="min-w-0 grow rounded-none bg-white-light px-5 py-3 text-gray-dark"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="text"
+                autoComplete="country-name"
+                placeholder="Country"
+                className="min-w-0 grow rounded-none bg-white-light px-5 py-3 text-gray-dark"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
               />
               <button
                 type="submit"
