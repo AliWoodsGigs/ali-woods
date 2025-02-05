@@ -9,10 +9,14 @@ const countryList = Object.entries(countries.getNames("en"))
   .filter(([code]) => code !== "GB") // Remove UK from the original list
   .sort((a, b) => a[1].localeCompare(b[1])); // Sort remaining countries alphabetically
 
-const prioritizedCountries = [
-  ["GB", "United Kingdom"], // Manually place UK at the top
-  ...countryList, // Append the rest of the countries
-];
+  const prioritizedCountries = [
+    ["ENG", "England"],
+    ["SCT", "Scotland"],
+    ["WLS", "Wales"],
+    ["NIR", "Northern Ireland"],
+    ["IE", "Republic of Ireland"], // Manually place Republic of Ireland below the UK countries
+    ...countryList.filter(([code]) => code !== "IE"), // Remove Ireland from the rest of the list
+  ];  
 
 
 function isValidEmail(email: string) {
@@ -109,9 +113,7 @@ const Newsletter = () => {
             Never miss a <span className="text-yellow">punchline</span>
           </h2>
           <p className="my-8 text-white">
-            {`Sign up for Ali's newsletter to receive exclusive updates, 
-          behind-the-scenes anecdotes, and early access to ticket sales. 
-          Be the first to know about upcoming gigs, special events, and all things Ali.`}
+            {`Be the first to know about upcoming gigs, special events, and all things Ali.`}
           </p>
           {isSuccess ? (
             <p className=" text-black border-4 bg-yellow px-4 py-2 ">
@@ -135,7 +137,7 @@ const Newsletter = () => {
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
               >
-                <option value="" disabled>Where do you live?</option>
+                <option value="" disabled>Where do you want to see me perform?</option>
                 {prioritizedCountries.map(([code, name]) => (
                   <option key={code} value={name}>
                     {name}
