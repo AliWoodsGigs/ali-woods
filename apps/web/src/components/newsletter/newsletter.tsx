@@ -155,7 +155,7 @@ const Newsletter = () => {
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
               >
-                <option value="" disabled>Select your country</option>
+                <option value="" disabled>Country</option>
                 {prioritizedCountries.map(([code, name]) => (
                   <option key={code} value={name}>
                     {name}
