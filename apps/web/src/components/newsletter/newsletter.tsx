@@ -114,7 +114,7 @@ const Newsletter = () => {
             Never miss a <span className="text-yellow">punchline</span>
           </h2>
           <p className="my-8 text-white">
-            {`Be the first to know about upcoming gigs, special events, and all things Ali.`}
+            {`Be the first to know about upcoming gigs, special events, and all things Ali`}
           </p>
           {isSuccess ? (
             <p className=" text-black border-4 bg-yellow px-4 py-2 ">
