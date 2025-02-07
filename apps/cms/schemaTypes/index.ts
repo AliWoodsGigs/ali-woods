@@ -132,17 +132,14 @@ const Subscribers = defineType({
       name: "city",
       title: "City",
       type: "string",
-      description: "City of the subscriber",
+      description: "City",
       validation: (rule) => rule.max(100), // Limit to 100 characters
     }),
     defineField({
       name: "country",
       title: "Country",
       type: "string",
-      description: "Country of the subscriber",
-      options: {
-        list: countryList, // Prioritized country list
-      },
+      description: "Country"
     })
   ]
 });

@@ -6,7 +6,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   if (req.method === "POST") {
-    const { email, country, city } = req.body;
+    const { email, city, country } = req.body;
 
     // Validate email (country and city are optional)
     if (!email) {
@@ -15,7 +15,7 @@ export default async function handler(
 
     try {
       // Step 1: Save to Sanity
-      const response = await postEmail(email, country, city);
+      const response = await postEmail(email, city, country);
 
       if (response?.email !== email) {
         throw new Error("Error saving email to Sanity");
