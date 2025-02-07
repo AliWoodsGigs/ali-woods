@@ -19,11 +19,12 @@ export async function getHomeProps(): Promise<HomeProps> {
   return response;
 }
 
-export async function postEmail(email: string, country: string): Promise<any> {
+export async function postEmail(email: string, city?: string, country?: string): Promise<any> {
   const response = await sanityClient.create({
     _type: "subscribers",
     email,
-    country,
+    city,
+    country
   });
   return response;
 }

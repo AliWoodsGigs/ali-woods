@@ -3,10 +3,20 @@ import countries from "i18n-iso-countries";
 import enLocale from "i18n-iso-countries/langs/en.json";
 
 countries.registerLocale(enLocale);
-const countryList = Object.entries(countries.getNames("en")).map(([code, name]) => ({
-  title: name,
-  value: name,
-}));
+const countryList = [
+  { title: "England", value: "England" },
+  { title: "Scotland", value: "Scotland" },
+  { title: "Wales", value: "Wales" },
+  { title: "Northern Ireland", value: "Northern Ireland" },
+  { title: "Republic of Ireland", value: "Republic of Ireland" },
+  ...Object.entries(countries.getNames("en"))
+    .filter(([code]) => code !== "GB" && code !== "IE") // Exclude United Kingdom and Republic of Ireland
+    .map(([code, name]) => ({
+      title: name,
+      value: name,
+    }))
+];
+
 
 
 const Gig = defineType({
@@ -108,27 +118,34 @@ const Video = defineType({
 });
 
 const Subscribers = defineType({
-  name: 'subscribers',
-  title: 'Newsletter Subscribers',
-  type: 'document',
+  name: "subscribers",
+  title: "Newsletter Subscribers",
+  type: "document",
   fields: [
     defineField({
-      name: 'email',
-      title: 'Email',
-      type: 'string',
+      name: "email",
+      title: "Email",
+      type: "string",
       validation: (rule) => rule.required().email(),
     }),
     defineField({
-      name: 'country',
-      title: 'Country',
-      type: 'string',
-      description: 'Country of the subscriber',
-      options: {
-        list: countryList, // Ensure countryList is defined using ISO 3166
-      },
+      name: "city",
+      title: "City",
+      type: "string",
+      description: "City of the subscriber",
+      validation: (rule) => rule.max(100), // Limit to 100 characters
     }),
-    
-  ],
+    defineField({
+      name: "country",
+      title: "Country",
+      type: "string",
+      description: "Country of the subscriber",
+      options: {
+        list: countryList, // Prioritized country list
+      },
+    })
+  ]
 });
+
 
 export const schemaTypes = [Gig, Video, Subscribers];

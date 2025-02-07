@@ -45,6 +45,7 @@ const cardVariants = {
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -124,6 +125,7 @@ const Newsletter = () => {
               className="border-black flex w-full flex-col gap-4 text-sm sm:text-base"
               onSubmit={handleSubmit}
             >
+              {/* Email Input */}
               <input
                 type="email"
                 autoComplete="email"
@@ -132,19 +134,36 @@ const Newsletter = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+
+              {/* Section Text */}
+              <p className="text-white text-base sm:text-lg font-bold">
+                Where do you want to see me perform?
+              </p>
+
+              {/* City Input */}
+              <input
+                type="text"
+                placeholder="City"
+                className="min-w-0 grow rounded-none bg-white-light px-5 py-3 text-gray-dark border-4"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+
+              {/* Country Dropdown */}
               <select
                 className="min-w-0 grow rounded-none bg-white-light px-5 py-3 text-gray-dark border-4"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
               >
-                <option value="" disabled>Where do you want to see me perform?</option>
+                <option value="" disabled>Select your country</option>
                 {prioritizedCountries.map(([code, name]) => (
                   <option key={code} value={name}>
                     {name}
                   </option>
                 ))}
-
               </select>
+
+              {/* Submit Button */}
               <button
                 type="submit"
                 className="bg-blue border-black shrink-0 border-4 px-5 py-3 font-bold uppercase text-yellow"

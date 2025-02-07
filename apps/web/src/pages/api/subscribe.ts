@@ -6,21 +6,26 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   if (req.method === "POST") {
-    const { email, country } = req.body;
+    const { email, country, city } = req.body;
 
-    // Validate email and country
-    if (!email || !country) {
-      return res.status(400).json({ message: "Email and Country are required" });
+    // Validate email (country and city are optional)
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
     }
 
     try {
-      const response = await postEmail(email, country);
+      // Step 1: Save to Sanity
+      const response = await postEmail(email, country, city);
 
-      if (response?.email === email) {
-        res.status(200).json({ message: "Successfully signed up!" });
-      } else {
-        res.status(500).json({ message: "Error submitting email" });
+      if (response?.email !== email) {
+        throw new Error("Error saving email to Sanity");
       }
+
+      // Step 2: Add to Mailchimp (if applicable)
+      // To be added
+
+      // Success response
+      res.status(200).json({ message: "Successfully signed up!" });
     } catch (error) {
       console.error("Error in handler:", error);
       res.status(500).json({ message: "Server Error" });
@@ -29,3 +34,4 @@ export default async function handler(
     res.status(405).json({ message: "Method Not Allowed" });
   }
 }
+
