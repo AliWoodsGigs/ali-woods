@@ -63,7 +63,7 @@ const Newsletter = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, country }),
+      body: JSON.stringify({ email, city, country }),
     });
 
     if (res.ok) {
