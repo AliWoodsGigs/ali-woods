@@ -1,10 +1,8 @@
 import { postEmail } from "@/lib/sanity.queries";
+import { upsertMailchimpSubscriber } from "@/lib/mailchimp";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     const { email, city, country } = req.body;
 
@@ -21,8 +19,8 @@ export default async function handler(
         throw new Error("Error saving email to Sanity");
       }
 
-      // Step 2: Add to Mailchimp (if applicable)
-      // To be added
+      // Step 2: Add or Update Subscriber in Mailchimp
+      await upsertMailchimpSubscriber(email, city, country);
 
       // Success response
       res.status(200).json({ message: "Successfully signed up!" });
@@ -34,4 +32,3 @@ export default async function handler(
     res.status(405).json({ message: "Method Not Allowed" });
   }
 }
-
